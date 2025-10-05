@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>成都芯谷实验学校 - 官方门户</title>
+    <title>成都芯谷实验学校 - 官方恶搞门户</title>
     <style>
         /* 基础重置 */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: "微软雅黑", sans-serif; 
-            background: #f0f8ff;
+            background: #f8f9fa; /* 改为更柔和的浅灰色 */
             color: #333;
             line-height: 1.6;
             display: flex;
@@ -113,6 +113,9 @@
             height: auto;
             display: block;
             margin-right: 15px;
+            background: #ffd700; /* 备用背景色 */
+            padding: 5px;
+            border-radius: 5px;
         }
         
         .school-name {
@@ -148,16 +151,34 @@
         }
         .nav-links a:hover::after { width: 100%; }
 
-        /* 英雄区域 */
+        /* 英雄区域 - 修复背景问题 */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                        url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center/cover;
+            background: 
+                linear-gradient(rgba(30, 58, 138, 0.7), rgba(30, 58, 138, 0.7)), 
+                url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') 
+                center/cover no-repeat; /* 确保图片覆盖且不重复 */
             height: 500px;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: white;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3); /* 加深遮罩确保文字清晰 */
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
         }
         
         .hero-content h1 {
@@ -181,6 +202,8 @@
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s;
+            position: relative;
+            z-index: 2;
         }
         
         .btn:hover {
@@ -192,7 +215,10 @@
 
         /* 内容区域 */
         .section {
-            padding: 80px 20px;
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white; /* 内容区域使用白色背景 */
         }
         
         .section-title {
@@ -216,7 +242,7 @@
             transform: translateX(-50%);
             width: 80px;
             height: 4px;
-            background-color: #ffd700;
+            background: #ffd700;
         }
 
         /* 卡片布局 */
@@ -241,11 +267,18 @@
         .card-img {
             height: 200px;
             overflow: hidden;
-            background: #eee;
+            background: #f0f0f0; /* 图片加载前的占位背景 */
             display: flex;
             align-items: center;
             justify-content: center;
             color: #999;
+            position: relative;
+        }
+        
+        .card-img::after {
+            content: '图片加载中...';
+            position: absolute;
+            color: #ccc;
         }
         
         .card-img img {
@@ -253,6 +286,7 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s;
+            display: block; /* 确保图片块级显示 */
         }
         
         .card:hover .card-img img {
@@ -276,4 +310,468 @@
         }
 
         /* 创新课堂 - 半条命梗 */
-        .ha
+        .half-life-card {
+            background: linear-gradient(135deg, #2c3e50, #4a235a);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .half-life-card::before {
+            content: "半条命梗";
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background: #e74c3c;
+            color: white;
+            padding: 5px 30px;
+            transform: rotate(45deg);
+            font-size: 14px;
+            font-weight: bold;
+            z-index: 10;
+        }
+        
+        .resonance-demo {
+            background: rgba(0,0,0,0.2);
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .resonance-bar {
+            height: 30px;
+            background: #e74c3c;
+            border-radius: 15px;
+            margin: 10px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .resonance-fill {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, #ffd700, #e74c3c);
+            border-radius: 15px;
+            transition: width 1s;
+        }
+        
+        .resonance-control {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .resonance-btn {
+            flex: 1;
+            background: #ffd700;
+            color: #1e3a8a;
+            border: none;
+            padding: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .resonance-btn:hover {
+            background: #e67e22;
+            color: white;
+        }
+
+        /* 页脚 */
+        footer {
+            background: #1e3a8a;
+            color: white;
+            padding: 60px 5% 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: #ffd700;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #ffd700;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .taskbar {
+                position: fixed;
+                height: 100%;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .taskbar.expanded {
+                transform: translateX(0);
+                width: 200px;
+            }
+            
+            .taskbar-toggle {
+                position: absolute;
+                right: -50px;
+                top: 20px;
+                background: #1e3a8a;
+                width: 50px;
+                height: 50px;
+                border-radius: 0 5px 5px 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .navbar {
+                flex-direction: column;
+                height: auto;
+                padding: 15px;
+            }
+            
+            .nav-links {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 0 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 可伸缩任务栏 -->
+    <div class="taskbar" id="taskbar">
+        <div class="taskbar-toggle" onclick="toggleTaskbar()">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="taskbar-items">
+            <li class="taskbar-item active" onclick="scrollToSection('home')">
+                <i class="fas fa-home"></i>
+                <span>首页</span>
+            </li>
+            <li class="taskbar-item" onclick="scrollToSection('themes')">
+                <i class="fas fa-star"></i>
+                <span>校园特色</span>
+            </li>
+            <li class="taskbar-item" onclick="scrollToSection('innovation')">
+                <i class="fas fa-flask"></i>
+                <span>创新课堂</span>
+            </li>
+            <li class="taskbar-item" onclick="scrollToSection('contact')">
+                <i class="fas fa-envelope"></i>
+                <span>联系我们</span>
+            </li>
+            <li class="taskbar-item" onclick="toggleTaskbar()">
+                <i class="fas fa-compress"></i>
+                <span>折叠任务栏</span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <!-- 导航栏 -->
+        <nav class="navbar">
+            <div class="logo-container">
+                <div class="school-name">成都芯谷实验学校</div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#themes">校园特色</a></li>
+                <li><a href="#innovation">创新课堂</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+        </nav>
+
+        <!-- 英雄区域 -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <h1>创新 · 恶搞 · 未来</h1>
+                <p>成都芯谷实验学校——给你"别人家的学校"体验</p>
+                <a href="#themes" class="btn">探索特色</a>
+            </div>
+        </section>
+
+        <!-- 校园特色 -->
+        <section id="themes" class="section">
+            <div class="section-title">
+                <h2>校园特色</h2>
+            </div>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                             alt="学校建筑" 
+                             onerror="this.style.display='none'; this.parentNode.innerHTML='图片加载失败'">
+                    </div>
+                    <div class="card-content">
+                        <h3>全世界最干净的厕所</h3>
+                        <p>配备智能感应冲水系统，每节课间自动消毒3次！瓷砖墙面亮到能照见你的发型，连下水道都没有异味——毕竟我们用了"香水掩盖法"和"拖把疏通术"双重buff～</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                             alt="学生活动" 
+                             onerror="this.style.display='none'; this.parentNode.innerHTML='图片加载失败'">
+                    </div>
+                    <div class="card-content">
+                        <h3>文明到"可怕"的学生</h3>
+                        <p>课间操整齐划一得像机器人军团！走廊行走静悄悄，连说话都用"唇语"——哦对了，偶尔会有同学把红领巾系在头上当"超人披风"，或者用扫帚当"吉他"开演唱会～</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                             alt="校园环境" 
+                             onerror="this.style.display='none'; this.parentNode.innerHTML='图片加载失败'">
+                    </div>
+                    <div class="card-content">
+                        <h3>鸟语花香的"生态乐园"</h3>
+                        <p>花园里的玫瑰开得比脸还大！每天早上都有小鸟在枝头唱歌——还有成群的蚊子在耳边"伴奏"，以及操场边随处可见的零食包装袋"装饰"地面～</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 创新课堂 -->
+        <section id="innovation" class="section" style="background: #e6f0ff;">
+            <div class="section-title">
+                <h2>创新课堂</h2>
+            </div>
+            <div class="cards">
+                <!-- 半条命梗：串联共振 -->
+                <div class="card half-life-card">
+                    <div class="card-content">
+                        <h3><i class="fas fa-bolt"></i> 串联共振（半条命梗）</h3>
+                        <p>本课程探索"半条命"游戏中的物理原理，特别是著名的"串联共振"现象。学生将学习如何利用游戏中的物理引擎创造连锁反应。</p>
+                        
+                        <ul>
+                            <li>利用重力枪制造连锁反应</li>
+                            <li>在虚拟环境中测试物理定律</li>
+                            <li>创建自己的"共振串联"装置</li>
+                            <li>探索游戏物理引擎的极限</li>
+                        </ul>
+                        
+                        <div class="resonance-demo">
+                            <h4>串联共振演示</h4>
+                            <div class="resonance-bar">
+                                <div class="resonance-fill" id="resonanceFill"></div>
+                            </div>
+                            <p id="resonanceText">共振能量: 0%</p>
+                            <div class="resonance-control">
+                                <button class="resonance-btn" onclick="increaseResonance()">增加共振</button>
+                                <button class="resonance-btn" onclick="resetResonance()">重置</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                             alt="量子计算" 
+                             onerror="this.style.display='none'; this.parentNode.innerHTML='图片加载失败'">
+                    </div>
+                    <div class="card-content">
+                        <h3><i class="fas fa-atom"></i> 量子恶搞学</h3>
+                        <p>探索量子物理的搞笑一面，学习薛定谔的猫如何在实验中既死又活，同时还能偷吃实验员的午餐。</p>
+                        
+                        <ul>
+                            <li>量子叠加态恶搞实验</li>
+                            <li>量子纠缠的搞笑应用</li>
+                            <li>海森堡测不准原理的幽默解读</li>
+                            <li>量子隧穿效应恶作剧</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer id="contact">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>成都芯谷实验学校</h3>
+                    <p>地址：成都市XX区芯谷路88号（门口有棵歪脖子树，是学生"秘密基地"）</p>
+                    <p>电话：028-XXXXXXX（接电话的是门卫大叔，他会告诉你哪个厕所隔间有插座）</p>
+                    <p>邮箱：admin@xingu-school.com（发邮件会收到"文明学生"表情包）</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>快速链接</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">首页</a></li>
+                        <li><a href="#themes">校园特色</a></li>
+                        <li><a href="#innovation">创新课堂</a></li>
+                        <li><a href="#contact">联系我们</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>相关资源</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">技术博客</a></li>
+                        <li><a href="#">开源项目</a></li>
+                        <li><a href="#">学术期刊</a></li>
+                        <li><a href="#">活动日历</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2004-2024 成都芯谷实验学校 版权所有</p>
+                <p>备案号：沪ICP备1337号（其实没备案，就是随便写的）</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // 任务栏功能
+        const taskbar = document.getElementById('taskbar');
+        let taskbarExpanded = false;
+        
+        function toggleTaskbar() {
+            taskbarExpanded = !taskbarExpanded;
+            taskbar.classList.toggle('expanded', taskbarExpanded);
+        }
+        
+        // 移动端任务栏控制
+        if (window.innerWidth <= 768) {
+            taskbarExpanded = false;
+            taskbar.classList.remove('expanded');
+        }
+        
+        // 滚动到指定区域
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+                
+                // 更新任务栏活动状态
+                document.querySelectorAll('.taskbar-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                event.currentTarget.classList.add('active');
+                
+                // 在移动端点击后折叠任务栏
+                if (window.innerWidth <= 768) {
+                    toggleTaskbar();
+                }
+            }
+        }
+        
+        // 半条命梗 - 串联共振效果
+        let resonanceLevel = 0;
+        const resonanceFill = document.getElementById('resonanceFill');
+        const resonanceText = document.getElementById('resonanceText');
+        
+        function increaseResonance() {
+            if (resonanceLevel < 100) {
+                resonanceLevel += 10;
+                resonanceFill.style.width = resonanceLevel + '%';
+                resonanceText.textContent = `共振能量: ${resonanceLevel}%`;
+                
+                if (resonanceLevel === 100) {
+                    resonanceText.innerHTML = '共振能量: 100%<br><strong>半条命启动！</strong>';
+                }
+            }
+        }
+        
+        function resetResonance() {
+            resonanceLevel = 0;
+            resonanceFill.style.width = '0%';
+            resonanceText.textContent = '共振能量: 0%';
+        }
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // 图片加载失败处理
+        document.querySelectorAll('.card-img img').forEach(img => {
+            img.onerror = function() {
+                this.style.display = 'none';
+                this.parentNode.innerHTML = '图片加载失败';
+            };
+        });
+        
+        // 桌面端鼠标悬停展开任务栏
+        if (window.innerWidth > 768) {
+            taskbar.addEventListener('mouseenter', () => {
+                if (!taskbarExpanded) {
+                    taskbar.classList.add('expanded');
+                }
+            });
+            
+            taskbar.addEventListener('mouseleave', () => {
+                if (!taskbarExpanded) {
+                    taskbar.classList.remove('expanded');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
