@@ -3,15 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>成都芯谷实验学校 - 官方门户</title>
+    <title>成都芯谷实验学校 - 官方恶搞门户</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* 基础重置 */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: "微软雅黑", sans-serif; 
             background: #f0f8ff;
             color: #333;
             line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
         }
+
+        /* 可伸缩任务栏 */
+        .taskbar {
+            width: 60px;
+            background: #1e3a8a;
+            color: white;
+            transition: all 0.3s ease;
+            z-index: 100;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .taskbar.expanded {
+            width: 200px;
+        }
+        
+        .taskbar-toggle {
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .taskbar-toggle i {
+            font-size: 1.5rem;
+            color: #ffd700;
+        }
+        
+        .taskbar-items {
+            list-style: none;
+        }
+        
+        .taskbar-item {
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .taskbar-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .taskbar-item i {
+            font-size: 1.2rem;
+            min-width: 24px;
+            margin-right: 15px;
+            color: #ffd700;
+        }
+        
+        .taskbar-item span {
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .taskbar.expanded .taskbar-item span {
+            opacity: 1;
+        }
+        
+        .taskbar-item.active {
+            background: rgba(255,255,255,0.2);
+            border-left: 4px solid #ffd700;
+        }
+
+        /* 主内容区域 */
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            height: 100vh;
+        }
+
+        /* 导航栏 */
         .navbar {
             background: #1e3a8a;
             padding: 0 5%;
@@ -24,27 +104,44 @@
             z-index: 100;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
         .school-logo {
             width: 50px;
             height: auto;
             display: block;
             margin-right: 15px;
         }
+        
+        .school-name {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
         .nav-links {
             display: flex;
             list-style: none;
             gap: 30px;
         }
+        
         .nav-links a {
             color: white;
             text-decoration: none;
             font-size: 1rem;
             transition: color 0.3s;
         }
+        
         .nav-links a:hover { color: #ffd700; }
+
+        /* 英雄区域 */
         .hero {
-            background: linear-gradient(rgba(30,58,138,0.5), rgba(30,58,138,0.5)), 
-                        url('https://www.cdsledu.net/default/download/news_image.image.9905b133f4f057da.30373139343036363539303037343939392e.png') no-repeat center/cover;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center/cover;
             height: 500px;
             display: flex;
             align-items: center;
@@ -52,8 +149,19 @@
             text-align: center;
             color: white;
         }
-        .hero-content h1 { font-size: 2.5rem; margin-bottom: 20px; }
-        .hero-content p { font-size: 1.1rem; margin-bottom: 30px; }
+        
+        .hero-content h1 { 
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero-content p { 
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
         .btn {
             display: inline-block;
             background: #ffd700;
@@ -64,66 +172,100 @@
             font-weight: bold;
             transition: all 0.3s;
         }
-        .btn:hover { background: transparent; border: 2px solid #ffd700; }
-        .section { padding: 80px 5%; max-width: 1200px; margin: 0 auto; }
-        .section-title { text-align: center; margin-bottom: 60px; color: #1e3a8a; }
-        .section-title h2 { font-size: 2.2rem; position: relative; display: inline-block; padding-bottom: 15px; }
-        .section-title h2::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 4px; background: #ffd700; }
-        .theme-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .theme-card { background: white; border-radius: 10px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s; cursor: pointer; position: relative; }
-        .theme-card:hover { transform: translateY(-10px); }
-        .theme-card h3 { font-size: 1.5rem; color: #1e3a8a; margin-bottom: 15px; display: flex; align-items: center; }
-        .theme-card h3 i { margin-right: 10px; color: #ffd700; }
-        .theme-card p { color: #666; font-size: 1rem; line-height: 1.8; }
-        .theme-card::after { content: attr(data-hidden); position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%); background: #1e3a8a; color: white; padding: 5px 10px; border-radius: 5px; font-size: 0.9rem; opacity: 0; transition: opacity 0.3s; white-space: nowrap; }
-        .theme-card:hover::after { opacity: 1; }
-        .news-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
-        .news-card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s; }
-        .news-card:hover { transform: translateY(-5px); }
-        .news-img { height: 200px; background: #eee; display: flex; align-items: center; justify-content: center; color: #999; font-size: 0.9rem; }
-        .news-content { padding: 20px; }
-        .news-content h3 { font-size: 1.3rem; color: #1e3a8a; margin-bottom: 10px; }
-        .news-content p { color: #666; margin-bottom: 15px; line-height: 1.8; }
-        .news-detail { display: none; background: #f8f8f8; padding: 15px; border-radius: 5px; margin-top: 10px; color: #d32f2f; }
-        .show-detail { display: block; }
-        .back-home { display: inline-block; background: #1e3a8a; color: white; padding: 8px 20px; border-radius: 5px; text-decoration: none; font-size: 0.9rem; margin-top: 10px; cursor: pointer; }
-        .back-home:hover { background: #2563eb; }
-        footer { background: #1e3a8a; color: white; padding: 60px 5% 30px; text-align: center; }
-        .footer-content { max-width: 800px; margin: 0 auto; }
-        .footer-content p { margin: 10px 0; font-size: 0.9rem; color: #ccc; }
-        .copyright { margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); color: #999; font-size: 0.8rem; }
-        .meme-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center; flex-direction: column; color: white; animation: fadeIn 0.5s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .modal-content { background: white; padding: 40px; border-radius: 10px; max-width: 500px; width: 90%; text-align: center; color: #333; }
-        .modal-content h3 { color: #d32f2f; font-size: 1.5rem; margin-bottom: 20px; }
-        .close-modal { position: absolute; top: 20px; right: 20px; font-size: 1.5rem; cursor: pointer; color: white; }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-    <nav class="navbar">
-        <img src="https://www.cdsledu.net/default/download/news_image.image.9905b133f4f057da.30373139343036363539303037343939392e.png" alt="成都芯谷实验学校" class="school-logo">
-        <ul class="nav-links">
-            <li><a href="#home">首页</a></li>
-            <li><a href="#themes">校园特色</a></li>
-            <li><a href="#news">校园动态</a></li>
-            <li><a href="#contact">联系我们</a></li>
-        </ul>
-    </nav>
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>文明 · 清洁 · 诗意</h1>
-            <p>成都芯谷实验学校——给你“别人家的学校”体验</p>
-            <a href="#themes" class="btn">探索特色</a>
-        </div>
-    </section>
-    <section class="section" id="themes">
-        <div class="section-title">
-            <h2>我们的“金字招牌”</h2>
-        </div>
-        <div class="theme-cards">
-            <div class="theme-card" data-hidden="温馨提示：找对下水道才能解锁‘锃亮’成就" onclick="openModal('toiletModal')">
-                <h3><i class="fas fa-toilet"></i> 全世界最干净的厕所</h3>
-                <p>配备智能感应冲水系统，每节课间自动消毒3次！瓷砖墙面亮到能照见你的发型，连下水道都没有异味——毕竟我们用了“香水掩盖法”和“拖把疏通术”双重buff～</p>
-            </div>
-            <div class="theme-card" data-h
+        
+        .btn:hover {
+            background: transparent;
+            border: 2px solid #ffd700;
+            color: white;
+        }
+
+        /* 内容板块 */
+        .section {
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: #1e3a8a;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: #ffd700;
+        }
+        
+        /* 创新课堂 - 半条命梗 */
+        .innovation-classes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .class-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .class-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .class-card.half-life {
+            background: linear-gradient(135deg, #2c3e50, #4a235a);
+            color: white;
+        }
+        
+        .class-card.half-life::before {
+            content: "半条命梗";
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background: #e74c3c;
+            color: white;
+            padding: 5px 30px;
+            transform: rotate(45deg);
+            font-size: 14px;
+            font-weight: bold;
+            z-index: 10;
+        }
+        
+        .class-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .class-card h3 i {
+            margin-right: 10px;
+            color: #ffd700;
+        }
+        
+        .class-card p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .class-card ul {
+            padding-left: 20
